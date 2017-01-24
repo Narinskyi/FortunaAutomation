@@ -130,6 +130,14 @@ public class Driver {
         executor.executeScript("arguments[0].click();", findElement(locator));
     }
 
+    public static void switchToFrame(By locator) {
+        driver().switchTo().frame(findElement(locator));
+    }
+
+    public static void switchToDefaultContent(){
+        driver().switchTo().defaultContent();
+    }
+
 
     /**---------------------------- Navigation ----------------------------*/
 

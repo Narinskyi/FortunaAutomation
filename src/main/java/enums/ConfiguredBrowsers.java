@@ -41,7 +41,7 @@ public enum ConfiguredBrowsers {
                 case firefox:
                     new RemoteWebDriver(host,getFirefoxCapabilities());
                 case chrome:
-                    return new RemoteWebDriver(host,DesiredCapabilities.chrome());
+                    return new RemoteWebDriver(host,getChromeCapabilities());
                 case edge:
                     return new RemoteWebDriver(host,DesiredCapabilities.edge());
                 case ie:
@@ -67,7 +67,7 @@ public enum ConfiguredBrowsers {
                 case firefox:
                     return new FirefoxDriver(getFirefoxCapabilities());
                 case chrome:
-                    return new ChromeDriver();
+                    return new ChromeDriver(getChromeCapabilities());
                 case edge:
                     return new EdgeDriver();
                 case ie:
@@ -93,6 +93,15 @@ public enum ConfiguredBrowsers {
         System.setProperty("webdriver.ie.driver", "src/drivers/IEDriverServer.exe");
         System.setProperty("phantomjs.binary.path", "src/drivers/phantomjs.exe");
 
+    }
+
+    private DesiredCapabilities getChromeCapabilities() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--enable-bundled-ppapi-flash");
+        options.addArguments("--disable-npapi");
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        return capabilities;
     }
 
     private DesiredCapabilities getChromeTabletCapabilities(){

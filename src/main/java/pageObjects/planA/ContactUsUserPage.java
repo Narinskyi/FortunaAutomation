@@ -14,6 +14,7 @@ public class ContactUsUserPage extends AbstractMyAccountPage {
     private static final By TEXT_AREA = By.name("message-area");
 
     public void selectDropdownOption(String option) {
+        Driver.click(DROPDOWN_VALIDATION);
         Driver.setDropdownOptionByValue(DROPDOWN_TOPIC, option);
     }
 

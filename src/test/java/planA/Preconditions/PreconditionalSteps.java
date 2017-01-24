@@ -21,7 +21,7 @@ public class PreconditionalSteps extends AbstractTest {
     public static void prepareUser(UserData userData) {
         generateUniqueUserdata(userData);
         registerThroughBackend(userData);
-        loginToFortunaExtdev(userData);
+        //loginToFortunaExtdev(userData);
     }
 
     public static void prepareUserAndLogin(UserData userData) {

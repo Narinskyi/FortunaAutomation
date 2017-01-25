@@ -1,6 +1,6 @@
 package springConstructors;
 
-public class UserData {
+public class UserData implements Cloneable{
 
     private String gender;
     private String title;
@@ -218,4 +218,15 @@ public class UserData {
     public void setCurrency(String currency) {
         this.currency = currency;
     }
+
+    @Override
+    public UserData clone() {
+        try {
+            return (UserData)super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

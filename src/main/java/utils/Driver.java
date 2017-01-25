@@ -130,6 +130,14 @@ public class Driver {
         executor.executeScript("arguments[0].click();", findElement(locator));
     }
 
+    public static void switchToFrame(By locator) {
+        driver().switchTo().frame(findElement(locator));
+    }
+
+    public static void switchToDefaultContent(){
+        driver().switchTo().defaultContent();
+    }
+
 
     /**---------------------------- Navigation ----------------------------*/
 
@@ -190,6 +198,14 @@ public class Driver {
                 replaceAll(DataProvider.getBaseUrl(),"");
     }
 
+    public static String getSelectedOption(By locator) {
+        log.info("Getting selected option of: "+ locator + " dropdown");
+
+        Select select = new Select(findElement(locator));
+        WebElement selectedOption = select.getFirstSelectedOption();
+        return selectedOption.getText();
+    }
+
     public static byte[] makeScreenshot() {
         return ((TakesScreenshot) driver()).getScreenshotAs(OutputType.BYTES);
     }
@@ -244,6 +260,27 @@ public class Driver {
         driver().close();
         driver().switchTo().window(browserTabs.get(0));
         return isOpened;
+    }
+
+    public static boolean isNewTabOpened() {
+        //get window handlers as list
+        List<String> browserTabs = new ArrayList<>(driver().getWindowHandles());
+
+        //try to switch to new tab (wait until it's opened)
+        for (int i=0; i<3; i++) {
+            try {
+                driver().switchTo().window(browserTabs.get(1));
+                break;
+            } catch (IndexOutOfBoundsException e) {
+                if (i==2) return false;
+                waitFor(1000);
+            }
+        }
+
+        // then close tab and get back
+        driver().close();
+        driver().switchTo().window(browserTabs.get(0));
+        return true;
     }
 
 

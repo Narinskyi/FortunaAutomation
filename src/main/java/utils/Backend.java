@@ -10,9 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Backend {
 
-    public static void createUser() {
-
-        UserData userData = DataProvider.getUserData();
+    public static void createUser(UserData userData) {
 
         Date now = new Date();
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");

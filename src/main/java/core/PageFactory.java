@@ -1,7 +1,8 @@
 package core;
 
-import enums.AvailablePages;
-import pageObjects.AbstractPage;
+import pageObjects.AvailablePages;
+import pageObjects.planA.AbstractPage;
+import pageObjects.planB.iFrames.Iframe;
 
 public class PageFactory {
 

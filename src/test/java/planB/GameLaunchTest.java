@@ -5,8 +5,9 @@ import core.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pageObjects.AvailablePages;
+import pageObjects.planB.GamePage;
 import pageObjects.planB.HomePage;
-import pageObjects.planB.iFrames.Game;
+import pageObjects.planB.iFrames.GameIframe;
 import pageObjects.planB.iFrames.LoginModal;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
@@ -15,25 +16,46 @@ import ru.yandex.qatools.allure.annotations.Stories;
 @Stories("Game Launch")
 public class GameLaunchTest extends AbstractTest{
 
-//    private static HomePage homePage = PageFactory.getPage(AvailablePages.home);
-//    private static LoginModal loginModal = LoginModal.get();
-//    private static Game game = Game.get();
-//
-//    @Test (groups = "desktop",enabled=false)
-//    public void guestLaunchTest() {
-//        homePage.open();
-//        homePage.clickGameItem(1);
-//        Assert.assertTrue(loginModal.isOpened(), "Login modal was not opened");
-//    }
-//
-//    @Test (groups = "desktop",enabled=false)
-//    public void userLaunchTest() {
-//        homePage.open();
-//        homePage.clickLogin();
-//        loginModal.login("testpb07", "playtech");
-//        homePage.waitForUserInfo();
-//        homePage.clickGameItem(1);
-//        Assert.assertTrue(game.isLaunchedInRealMode(), "Game launch in real mode failed");
-//    }
+    private static HomePage homePage = PageFactory.getPage(AvailablePages.home);
+    private static LoginModal loginModal = LoginModal.get();
+    private static GameIframe gameIframe = GameIframe.get();
+    private static GamePage gamePage = new GamePage();
+
+    @Test (groups = "desktop",enabled=true)
+    public void guestLaunchDemoGame() {
+        homePage.open();
+        homePage.clickGameItemDemo(1);
+        Assert.assertTrue(gameIframe.isLaunchedInDemoMode(), "Game launch in real mode failed");
+    }
+
+    @Test (groups = "desktop",enabled=true)
+    public void userLaunchRealGame() {
+        homePage.open();
+        homePage.login(userData.getUsername(), userData.getPassword());
+        homePage.clickGameItemReal(1);
+        Assert.assertTrue(gameIframe.isLaunchedInRealMode(), "Game launch in real mode failed");
+        Assert.assertFalse(gamePage.checkBalanceToDisappear(), "Balance hiding when game is launched failed");
+    }
+
+    @Test (groups = "desktop",enabled=true)
+    public void guestLaunchRealGameAndLogin() {
+        homePage.open();
+        homePage.clickGameItemReal(1);
+        loginModal.login(userData.getUsername(), userData.getPassword());
+        Assert.assertTrue(gameIframe.isLaunchedInRealMode(), "Game launch in real mode failed");
+        Assert.assertFalse(gamePage.checkBalanceToDisappear(), "Balance hiding when game is launched failed");
+    }
+
+    @Test (groups = "desktop",enabled=true)
+    public void balanceIsShownAfterGameClosing() {
+        homePage.open();
+        homePage.login(userData.getUsername(), userData.getPassword());
+        homePage.clickGameItemReal(1);
+        Assert.assertFalse(gamePage.checkBalanceToDisappear(), "Balance hiding when game is launched failed");
+        gamePage.clickLogo();
+        Assert.assertTrue(gamePage.isBalanceVisible(), "Balance appearing when game is closed failed");
+    }
+
+
 
 }

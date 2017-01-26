@@ -4,6 +4,7 @@ import core.AbstractTest;
 import core.WebDriverFactory;
 import enums.ConfiguredBrowsers;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -54,6 +55,17 @@ public class Driver {
         }
     }
 
+    //wait for element to disappear
+    public static void waitForElementToDisappear(By locator, int timeout) {
+        log.info("Waiting for disappearing of element " + locator);
+        WebDriverWait wait = new WebDriverWait(driver(), timeout);
+        try {
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        } catch (TimeoutException e) {
+            AbstractTest.failTest("Element: " + locator + " did not disappear after: " + timeout + " s");
+        }
+    }
+
     //wait for element text to change
     public static boolean isElementTextChangedTo(By locator, String newText){
         WebDriverWait wait = new WebDriverWait(driver(),TIMEOUT);
@@ -84,6 +96,12 @@ public class Driver {
         } catch (WebDriverException e) {
             AbstractTest.failTest("It was not possible to click element " + locator);
         }
+    }
+
+    public static void hover (By locator) {
+            Actions action = new Actions(driver());
+            WebElement we = findElement(locator);
+            action.moveToElement(we).build().perform();
     }
 
     public static void tap (String selector) {
@@ -195,7 +213,7 @@ public class Driver {
 
     public static String getURLSuffix() {
         return driver().getCurrentUrl().
-                replaceAll(DataProvider.getBaseUrl(),"");
+                replaceAll(DataProvider.getBaseUrl(), "");
     }
 
     public static String getSelectedOption(By locator) {
@@ -213,10 +231,19 @@ public class Driver {
     /**---------------------------- Booleans ----------------------------*/
 
     //is element visible?
-    public static boolean isElementVisible(By locator) {
+    public static boolean isElementVisible(By locator, int timeout) {
         log.info("Checking if " + locator + " is visible");
-        return findVisibleElement(locator)!=null;
+        if (findVisibleElement(locator, timeout)== null){
+            return false;
+        } else {
+            return true;
+        }
     }
+
+    public static boolean isElementVisible(By locator) {
+        return isElementVisible(locator, TIMEOUT);
+    }
+
 
     //is element present?
     public static boolean isElementPresent(By locator) {
@@ -317,19 +344,23 @@ public class Driver {
         return driver().findElements(locator);
     }
 
-    private static WebElement findVisibleElement(By locator) {
-
-        WebDriverWait wait = new WebDriverWait(driver(), TIMEOUT);
+    private static WebElement findVisibleElement(By locator, int timeout) {
+        WebDriverWait wait = new WebDriverWait(driver(), timeout);
 
         log.info("Waiting for visibility of element " + locator);
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         } catch (TimeoutException e) {
-            AbstractTest.failTest("Element: " + locator + " was not visible after: " + TIMEOUT + " s");
+            return null;
         }
         return driver().findElement(locator);
-
     }
+
+    private static WebElement findVisibleElement(By locator) {
+        return findVisibleElement(locator, TIMEOUT);
+    }
+
+
 
 
 }

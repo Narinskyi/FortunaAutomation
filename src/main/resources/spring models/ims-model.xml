@@ -9,6 +9,8 @@
     <property name="imsOpenApiConnection" value="https://extdev2-openapi.extdev.eu:443"/>
     <property name="imsLogin" value="wpl_automation"/>
     <property name="imsPass" value="7415963Res"/>
+    <property name="imsAdminLogin" value="Oleksii_N"/>
+    <property name="imsAdminPass" value="TheCakeIsAl1e1"/>
     <property name="imsCasino" value="playtech810037"/>
 </bean>
 

@@ -7,6 +7,25 @@ public class IMSData {
     private String imsCasino;
     private String imsLogin;
     private String imsPass;
+    private String imsAdminLogin;
+
+    public String getImsAdminLogin() {
+        return imsAdminLogin;
+    }
+
+    public void setImsAdminLogin(String imsAdminLogin) {
+        this.imsAdminLogin = imsAdminLogin;
+    }
+
+    public String getImsAdminPass() {
+        return imsAdminPass;
+    }
+
+    public void setImsAdminPass(String imsAdminPass) {
+        this.imsAdminPass = imsAdminPass;
+    }
+
+    private String imsAdminPass;
 
     public String getImsURL() {
         return imsURL;

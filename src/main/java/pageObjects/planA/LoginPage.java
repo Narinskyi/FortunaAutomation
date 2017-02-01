@@ -12,7 +12,8 @@ public class LoginPage extends AbstractMyAccountPage {
     private static final By INPUT_PASSWORD = By.name("password");
     private static final By EYE_ICON = By.cssSelector(".fn-toggle-password-visibility");
     private static final String EYE_ICON_CSS = ".fn-toggle-password-visibility";
-    private static final By CHECKBOX_REMEMBER_ME = By.cssSelector("label[for=rememberme]");
+    private static final By LABEL_REMEMBER_ME = By.cssSelector("label[for=rememberme]");
+    private static final By CHECKBOX_REMEMBER_ME = By.id("rememberme");
     private static final By BUTTON_LOGIN = By.cssSelector(".fn-login-btn");
     private static final By LINK_FORGOTTEN_PASSWORD = By.xpath("//a[@href='/forgotten-password']");
     private static final By LINK_REGISTER = By.xpath("//a[@href='/register-step-1']");
@@ -52,7 +53,7 @@ public class LoginPage extends AbstractMyAccountPage {
     }
 
     public void clickRememberMe() {
-        Driver.click(CHECKBOX_REMEMBER_ME);
+        Driver.click(LABEL_REMEMBER_ME);
     }
 
     public void clickLogin() {

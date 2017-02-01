@@ -151,11 +151,11 @@ public class LoginTest extends AbstractTest {
         Assert.assertTrue(loginPage.isDashboardPageOpened());
 
         //after test-logout
-        loginPage.quietLogout();
+        loginPage.logout();
     }
 
-    //disabled due to bug
-    @Test (groups = {"desktop", "tablet", "mobile"}, enabled = false)
+
+    @Test (groups = {"desktop", "tablet", "mobile"}, dependsOnMethods = "validInputTest")
     public void rememberMeTest(){
 
         loginPage.open();
@@ -172,6 +172,6 @@ public class LoginTest extends AbstractTest {
         loginPage.logout();
 
         Assert.assertTrue(loginPage.getUsernameInputText().equals(userData.getUsername()), "Username was not saved");
-        Assert.assertTrue(loginPage.isRememberMeChecked(), "Remember did not remain checked");
+        Assert.assertTrue(loginPage.isRememberMeChecked(), "Remember me did not remain checked");
     }
 }

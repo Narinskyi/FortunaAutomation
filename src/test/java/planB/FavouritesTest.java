@@ -21,4 +21,25 @@ public class FavouritesTest extends AbstractTest {
         homePage.login(userData.getUsername(), userData.getPassword());
         Assert.assertTrue(homePage.isFavouriteCategoryPresent(), "Favourites are absent for user");
     }
+
+    @Test(groups = {"desktop"})
+    public void favouritesCategoryDisappearsAfterLogout(){
+        homePage.open();
+        homePage.login(userData.getUsername(), userData.getPassword());
+        Assert.assertTrue(homePage.isFavouriteCategoryPresent(), "Favourites are absent for user");
+        homePage.logout();
+        Assert.assertTrue(homePage.isFavouriteCategoryDisappeared(), "Favourites are present for guest after logout");
+    }
+
+    @Test (groups = {"desktop"})
+    public void addToFavourites(){
+        homePage.open();
+        homePage.login(userData.getUsername(), userData.getPassword());
+        homePage.openFavouritesCategory();
+        homePage.removeAllFavourites();
+        homePage.openTopGamesCategory();
+        homePage.addGameToFavourites("whk");
+        homePage.openFavouritesCategory();
+        Assert.assertTrue(homePage.isFavouriteGamePresent("whk"), "Game isn't present into favourites after adding to favourites");
+    }
 }

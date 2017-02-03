@@ -1,12 +1,16 @@
 package pageObjects;
 
 import pageObjects.planA.*;
+import pageObjects.planB.BalancePopup;
+import pageObjects.planB.GamePage;
 import pageObjects.planB.HomePage;
 
 public enum AvailablePages {
 
     /*-------- Plan B pages --------*/
     home("home"),
+    game("igaming/whk"),
+    balancePopup("/balance-popup"),
 
     /*-------- Plan A pages --------*/
     changePassword("change-password"),
@@ -42,6 +46,8 @@ public enum AvailablePages {
 
             /*-------- Plan B pages --------*/
             case home: page = new HomePage();
+                break;
+            case game: page = new GamePage();
                 break;
 
             /*-------- Plan A pages --------*/

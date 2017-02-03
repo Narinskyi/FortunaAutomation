@@ -34,7 +34,7 @@ public class GameLaunchTest extends AbstractTest{
         homePage.login(userData.getUsername(), userData.getPassword());
         homePage.clickGameItemReal(1);
         Assert.assertTrue(gameIframe.isLaunchedInRealMode(), "Game launch in real mode failed");
-        Assert.assertFalse(gamePage.checkBalanceToDisappear(), "Balance hiding when game is launched failed");
+        Assert.assertTrue(gamePage.isBalanceDisappeared(), "Balance hiding when game is launched failed");
     }
 
     @Test (groups = "desktop",enabled=true)
@@ -43,7 +43,7 @@ public class GameLaunchTest extends AbstractTest{
         homePage.clickGameItemReal(1);
         loginModal.login(userData.getUsername(), userData.getPassword());
         Assert.assertTrue(gameIframe.isLaunchedInRealMode(), "Game launch in real mode failed");
-        Assert.assertFalse(gamePage.checkBalanceToDisappear(), "Balance hiding when game is launched failed");
+        Assert.assertTrue(gamePage.isBalanceDisappeared(), "Balance hiding when game is launched failed");
     }
 
     @Test (groups = "desktop",enabled=true)
@@ -51,7 +51,7 @@ public class GameLaunchTest extends AbstractTest{
         homePage.open();
         homePage.login(userData.getUsername(), userData.getPassword());
         homePage.clickGameItemReal(1);
-        Assert.assertFalse(gamePage.checkBalanceToDisappear(), "Balance hiding when game is launched failed");
+        Assert.assertFalse(gamePage.isBalanceDisappeared(), "Balance hiding when game is launched failed");
         gamePage.clickLogo();
         Assert.assertTrue(gamePage.isBalanceVisible(), "Balance appearing when game is closed failed");
     }

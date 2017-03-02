@@ -6,6 +6,7 @@ import utils.Driver;
 
 public class LoginModal implements Iframe{
 
+
     private static final By MODAL_IFRAME = By.cssSelector(".fn-popup-loader iframe");
     private static final By INPUT_USERNAME = By.name("login");
     private static final By INPUT_PASSWORD = By.name("password");

@@ -23,9 +23,9 @@
         <property name="phone" value="790000000"/>
         <property name="mobileAreaCode" value="+38"/>
         <property name="mobile" value="790000000"/>
-        <property name="username" value="autotest"/>
+        <property name="username" value="testpb07"/>
         <property name="profileUsername" value="autoChrProf"/>
-        <property name="password" value="Password1"/>
+        <property name="password" value="playtech"/>
         <property name="verificationQuestion" value="Name of your first pet?"/>
         <property name="verificationAnswer" value="Internet"/>
         <property name="currency" value="CZK"/>

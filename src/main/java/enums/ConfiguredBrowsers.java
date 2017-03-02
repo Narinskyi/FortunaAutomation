@@ -39,7 +39,7 @@ public enum ConfiguredBrowsers {
         if (useGrid) {
             switch (this) {
                 case firefox:
-                    new RemoteWebDriver(host,getFirefoxCapabilities());
+                    return new RemoteWebDriver(host,getFirefoxCapabilities());
                 case chrome:
                     return new RemoteWebDriver(host,getChromeCapabilities());
                 case edge:
@@ -134,6 +134,7 @@ public enum ConfiguredBrowsers {
     }
 
     private DesiredCapabilities getFirefoxCapabilities() {
+        System.setProperty("webdriver.gecko.driver", "src/drivers/geckodriver.exe");
         DesiredCapabilities desiredCapabilities = DesiredCapabilities.firefox();
         FirefoxProfile profile = new FirefoxProfile();
         desiredCapabilities.setCapability(FirefoxDriver.PROFILE, profile);

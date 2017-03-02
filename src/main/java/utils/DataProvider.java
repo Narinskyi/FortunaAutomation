@@ -18,7 +18,7 @@ public class DataProvider {
     private static Logger log = Logger.getAnonymousLogger();
     private static ResourceBundle resources = ResourceBundle.getBundle("ConfigBundle");
     private static UserData userData;
-    private static IMSData imsData;
+    private static IMSData  imsData;
 
     public static void setUserData(UserData userData) {
         DataProvider.userData = userData;

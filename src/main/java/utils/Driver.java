@@ -308,26 +308,6 @@ public class Driver {
         return isOpened;
     }
 
-    public static boolean isNewTabOpened() {
-        //get window handlers as list
-        List<String> browserTabs = new ArrayList<>(driver().getWindowHandles());
-
-        //try to switch to new tab (wait until it's opened)
-        for (int i=0; i<3; i++) {
-            try {
-                driver().switchTo().window(browserTabs.get(1));
-                break;
-            } catch (IndexOutOfBoundsException e) {
-                if (i==2) return false;
-                waitFor(1000);
-            }
-        }
-
-        // then close tab and get back
-        driver().close();
-        driver().switchTo().window(browserTabs.get(0));
-        return true;
-    }
 
 
     /**---------------------------- Private service methods ----------------------------*/

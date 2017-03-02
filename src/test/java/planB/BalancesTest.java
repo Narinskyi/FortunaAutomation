@@ -20,10 +20,10 @@ public class BalancesTest extends AbstractTest {
     public void compareBalances(){
         homePage.open();
         homePage.login(userData.getUsername(), userData.getPassword());
-        String balanceInHeader = homePage.getBalance();
+        double balanceInHeader = homePage.getBalance();
         homePage.clickBalance();
-        String balanceInPopup = balancePopup.getBalance();
-        Assert.assertEquals(balanceInHeader, balanceInPopup, "Balance in header differs from balance in popup");
+        double totalBalanceInPopup = balancePopup.getSumBalance();
+        Assert.assertEquals(balanceInHeader, totalBalanceInPopup, "Balance in header differs from total balance in popup");
     }
 
 

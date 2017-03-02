@@ -7,13 +7,13 @@ import utils.Driver;
 
 public abstract class AbstractCasinoPage extends AbstractPage {
 
-    private int someInt;
     private static final By BUTTON_SUBMIT = By.cssSelector("button[type='submit']");
     private static final By BUTTON_LOGIN = By.cssSelector(".fn-login");
-    public static final By BALANCE = By.cssSelector(".fn-main-header-user-balance");
+    public static final By BALANCE = By.cssSelector(".fn-main-header-user-balance:not(.hidden)");
     private static final By USERNAME = By.cssSelector(".user-info-replacer");
     private static final By LOGO = By.cssSelector(".main-header__logo");
     private static final By LOGOUT = By.cssSelector(".btn_type_logout.fn-logout");
+    private static final By BUTTON_DEPOSIT = By.cssSelector(".btn.btn_action_deposit");
 
     public void waitForUsername(){
         Driver.waitForElementVisibility(USERNAME);
@@ -27,13 +27,16 @@ public abstract class AbstractCasinoPage extends AbstractPage {
         Driver.click(BALANCE);
     }
 
+    public void clickDeposit(){
+        Driver.click(BUTTON_DEPOSIT);
+    }
+
     public boolean isBalanceVisible(){
         return Driver.isElementVisible(BALANCE, 0);
     }
 
     public boolean isBalanceDisappeared(){
-        Driver.waitForElementToDisappear(BALANCE, 3);
-        return !isBalanceVisible();
+       return Driver.isElementDisappeared(BALANCE, 3);
     }
 
     public void clickLogo(){
@@ -59,11 +62,11 @@ public abstract class AbstractCasinoPage extends AbstractPage {
             AbstractCasinoPopup.close();
         }
     }
-
-    public AbstractCasinoPopup test (){
-        LogoutPopup test = (LogoutPopup) new AbstractCasinoPopup();
-        test.get();
-        int someInt = this.someInt;
-        return null;
+    @Override
+    public void open(){
+        super.open();
+        if (Driver.isElementVisible(LOGOUT, 2)){
+            logout();
+        }
     }
 }

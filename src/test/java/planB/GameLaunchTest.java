@@ -25,7 +25,7 @@ public class GameLaunchTest extends AbstractTest{
     public void guestLaunchDemoGame() {
         homePage.open();
         homePage.clickGameItemDemo(1);
-        Assert.assertTrue(gameIframe.isLaunchedInDemoMode(), "Game launch in real mode failed");
+        Assert.assertTrue(gameIframe.isLaunchedInDemoMode(), "Game launch in demo mode failed");
     }
 
     @Test (groups = "desktop",enabled=true)
@@ -51,7 +51,7 @@ public class GameLaunchTest extends AbstractTest{
         homePage.open();
         homePage.login(userData.getUsername(), userData.getPassword());
         homePage.clickGameItemReal(1);
-        Assert.assertFalse(gamePage.isBalanceDisappeared(), "Balance hiding when game is launched failed");
+        Assert.assertTrue(gamePage.isBalanceDisappeared(), "Balance hiding when game is launched failed");
         gamePage.clickLogo();
         Assert.assertTrue(gamePage.isBalanceVisible(), "Balance appearing when game is closed failed");
     }

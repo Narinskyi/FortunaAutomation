@@ -8,6 +8,7 @@ import pageObjects.AvailablePages;
 import pageObjects.planB.GamePage;
 import pageObjects.planB.HomePage;
 import springConstructors.UserData;
+import utils.Driver;
 
 /**
  * Created by tysa on 31.01.2017.

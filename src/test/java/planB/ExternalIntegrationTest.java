@@ -20,7 +20,7 @@ public class ExternalIntegrationTest extends AbstractTest {
         homePage.open();
         homePage.login(userData.getUsername(), userData.getPassword());
         homePage.clickDeposit();
-        Assert.assertTrue(Driver.isNewTabOpened(), "deposit tab wasn't opened");
+        Assert.assertTrue(Driver.isNewTabOpened("https://www.ifortuna.cz/cz/uzivatel/sazeni/casino_dotace_i_konta/index.html"), "deposit tab wasn't opened");
     }
 
 }

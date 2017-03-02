@@ -6,7 +6,6 @@ import utils.Driver;
 public class HomePage extends AbstractCasinoPage {
 
     private static final By BUTTON_SIGN_UP = By.cssSelector(".btn_action_sign-up");
-    private static final By BUTTON_DEPOSIT = By.cssSelector(".btn.btn_action_deposit");
     private static final By GAMES_PORTLET = By.cssSelector(".portlet__content_type_games-info");
     private static final By INPUT_SEARCH_GAME = By.cssSelector(".fn-search-input");
     private static final String BUTTON_PLAY_REAL = "span.fn-launch-game:nth-of-type(2)";
@@ -18,12 +17,14 @@ public class HomePage extends AbstractCasinoPage {
     private static final String FAVOURITES_ICON_NOT_ACTIVE = ".fn-favorites:not(.active)";
     private static final String FAVOURITES_ICON_ANY = ".fn-favorites";
 
-    public String getBalance(){
-        return Driver.getElementText(BALANCE);
-    }
-
-    public String clickDeposit(){
-        return Driver.getElementText(BUTTON_DEPOSIT);
+    public double getBalance(){
+        String[] s = Driver.getElementText(BALANCE).split(" ");
+        s[s.length - 1] = "";
+        String result = "";
+        for (String el : s){
+            result += el;
+        }
+        return Double.parseDouble(result);
     }
 
     public void clickGameIcon(int whichOne) {
@@ -41,7 +42,7 @@ public class HomePage extends AbstractCasinoPage {
     }
 
     public boolean isFavouriteCategoryPresent(){
-        return Driver.isElementVisible(FAVOURITES_CATEGORY, 3);
+        return Driver.isElementVisible(FAVOURITES_CATEGORY, 2);
     }
 
     public boolean isFavouriteCategoryDisappeared(){
@@ -74,12 +75,6 @@ public class HomePage extends AbstractCasinoPage {
         return Driver.isElementVisible(GAMES_PORTLET);
     }
 
-    public LogoutPopup test (){
-      return null;
-    }
-
-    public void test2 (){
-        this.test();
-    }
-
 }
+
+
